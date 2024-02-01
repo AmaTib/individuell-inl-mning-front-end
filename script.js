@@ -69,15 +69,15 @@ closeDialog.addEventListener("click", async (ev) => {
   let url = "";
   let method = "";
   console.log(url);
-  var o = {
+  var newPlayer = {
     name: playerName.value,
     jersey: jersey.value,
     position: position.value,
   };
 
   if (editingPlayer != null) {
-    o.id = editingPlayer.id;
-    url = "http://localhost:3000/players/" + o.id;
+    newPlayer.id = editingPlayer.id;
+    url = "http://localhost:3000/players/" + newPlayer.id;
     method = "PUT";
   } else {
     url = "http://localhost:3000/players";
@@ -90,7 +90,7 @@ closeDialog.addEventListener("click", async (ev) => {
       "Content-Type": "application/json",
     },
     method: method,
-    body: JSON.stringify(o),
+    body: JSON.stringify(newPlayer),
   });
 
   let json = await response.json();
