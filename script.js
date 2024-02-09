@@ -56,6 +56,7 @@ const onClickPlayer = function (event) {
   const player = players.find(
     (p) => p.id === htmlElementetSomViHarKlickatPa.dataset.stefansplayerid
   );
+
   playerName.value = player.name;
   jersey.value = player.jersey;
   position.value = player.position;
@@ -102,7 +103,7 @@ closeDialog.addEventListener("click", async (ev) => {
 
 btnAdd.addEventListener("click", () => {
   playerName.value = "";
-  jersey.value = 0;
+  jersey.value = "";
   position.value = "";
   editingPlayer = null;
 
@@ -121,16 +122,17 @@ const updateTable = function () {
       continue;
     }
     let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    let btn = document.createElement("button");
+
+    btn.textContent = "EDIT";
+    btn.dataset.stefansplayerid = players[i].id;
 
     tr.appendChild(createTableTdOrTh("th", players[i].name));
     tr.appendChild(createTableTdOrTh("td", players[i].jersey));
     tr.appendChild(createTableTdOrTh("td", players[i].position));
-    tr.appendChild(createTableTdOrTh("td", players[i].team));
+    /* tr.appendChild(createTableTdOrTh("td", players[i].team)); */
 
-    let td = document.createElement("td");
-    let btn = document.createElement("button");
-    btn.textContent = "EDIT";
-    btn.dataset.stefansplayerid = players[i].id;
     td.appendChild(btn);
     tr.appendChild(td);
 
@@ -138,22 +140,22 @@ const updateTable = function () {
 
     // btn.addEventListener("click",function(){
     //       alert(players[i].name)
-    //       //                      detta funkar fast med sk closures = magi vg
+    //       //detta funkar fast med sk closures = magi vg
     // })
 
     allPlayersTBody.appendChild(tr);
-  }
 
-  // innerHTML och backticks `
-  // Problem - aldrig bra att bygga strängar som innehåller/kan innehålla html
-  //    injection
-  // for(let i = 0; i < players.length;i++) { // hrmmm you do foreach if you'd like, much nicer!
-  //                                         // I will show you in two weeks
-  //                                         //  or for p of players
-  //     let trText = `<tr><th scope="row">${players[i].name}</th><td>${players[i].jersey}</td><td>${players[i].position}</td><td>${players[i].team}</td></tr>`
-  //     allPlayersTBody.innerHTML += trText
-  // }
-  // createElement
+    // innerHTML och backticks `
+    // Problem - aldrig bra att bygga strängar som innehåller/kan innehålla html
+    //    injection
+    // for(let i = 0; i < players.length;i++) { // hrmmm you do foreach if you'd like, much nicer!
+    //                                         // I will show you in two weeks
+    //                                         //  or for p of players
+    //     let trText = `<tr><th scope="row">${players[i].name}</th><td>${players[i].jersey}</td><td>${players[i].position}</td><td>${players[i].team}</td></tr>`
+    //     allPlayersTBody.innerHTML += trText
+    // }
+    // createElement
+  }
 };
 
 updateTable();
