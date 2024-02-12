@@ -54,7 +54,7 @@ const onClickPlayer = function (event) {
   const htmlElementetSomViHarKlickatPa = event.target;
   console.log(htmlElementetSomViHarKlickatPa.dataset.stefansplayerid);
   const player = players.find(
-    (p) => p.id === htmlElementetSomViHarKlickatPa.dataset.stefansplayerid
+    (p) => p.id == htmlElementetSomViHarKlickatPa.dataset.stefansplayerid
   );
 
   playerName.value = player.name;
@@ -94,7 +94,7 @@ closeDialog.addEventListener("click", async (ev) => {
     body: JSON.stringify(newPlayer),
   });
 
-  let json = await response.json();
+  //let json = await response.json();
 
   players = await fetchPlayers();
   updateTable();

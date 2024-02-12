@@ -8,6 +8,11 @@
    --form-element-spacing-vertical: 1rem;
    --form-element-spacing-horizontal: 1.25rem;
  }
+
+ i:hover{
+  cursor: pointer;
+  background-color: #005237;
+ }
  
  h1,
  h2,
