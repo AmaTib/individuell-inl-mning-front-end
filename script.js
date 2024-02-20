@@ -2,6 +2,7 @@ const allPlayersTBody = document.querySelector("#allPlayers tbody");
 const searchPlayer = document.getElementById("searchPlayer");
 const btnAdd = document.getElementById("btnAdd");
 const closeDialog = document.getElementById("closeDialog");
+const form = document.getElementById("editForm");
 
 function Player(id, name, jersey, team, position) {
   this.id = id;
@@ -65,7 +66,7 @@ const onClickPlayer = function (event) {
   MicroModal.show("modal-1");
 };
 
-closeDialog.addEventListener("click", async (ev) => {
+form.addEventListener("submit", async (ev) => {
   ev.preventDefault();
   let url = "";
   let method = "";
