@@ -5,7 +5,7 @@ const closeDialog = document.getElementById("closeDialog");
 const form = document.getElementById("editForm");
 const allSortIcons = document.getElementsByClassName("bi");
 
-let currentSortCol = "jersey";
+let currentSortCol = "id";
 let currentSortOrder = "asc";
 let currentSearchText = "";
 

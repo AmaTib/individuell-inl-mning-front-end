@@ -44,10 +44,24 @@
         <table role="grid" id="allPlayers">
           <thead>
             <tr>
-              <th scope="col">Name</th>
+              <th scope="col">
+                Name
+                <div id="sortIcons">
+                  <i
+                    data-sortcol="name"
+                    data-sortorder="asc"
+                    class="bi bi-sort-alpha-down"
+                  ></i>
+                  <i
+                    data-sortcol="name"
+                    data-sortorder="desc"
+                    class="bi bi-sort-alpha-up-alt"
+                  ></i>
+                </div>
+              </th>
               <th scope="col">
                 Jersey
-                <div id="dortIcons">
+                <div id="sortIcons">
                   <i
                     data-sortcol="jersey"
                     data-sortorder="asc"
@@ -60,8 +74,22 @@
                   ></i>
                 </div>
               </th>
-              <th scope="col">Position</th>
-              <th scope="col">Team</th>
+              <th scope="col">
+                Position
+                <div id="sortIcons">
+                  <i
+                    data-sortcol="position"
+                    data-sortorder="asc"
+                    class="bi bi-sort-alpha-down"
+                  ></i>
+                  <i
+                    data-sortcol="position"
+                    data-sortorder="desc"
+                    class="bi bi-sort-alpha-up-alt"
+                  ></i>
+                </div>
+              </th>
+              <!-- <th scope="col">Team</th> -->
             </tr>
           </thead>
           <tbody>
