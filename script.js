@@ -3,6 +3,11 @@ const searchPlayer = document.getElementById("searchPlayer");
 const btnAdd = document.getElementById("btnAdd");
 const closeDialog = document.getElementById("closeDialog");
 const form = document.getElementById("editForm");
+const allSortIcons = document.getElementsByClassName("bi");
+
+let currentSortCol = "jersey";
+let currentSortOrder = "asc";
+let currentSearchText = "";
 
 function Player(id, name, jersey, team, position) {
   this.id = id;
@@ -160,6 +165,52 @@ const updateTable = function () {
 };
 
 updateTable();
+
+async function refreshTable() {
+  let url =
+    "http://localhost:3000/players?sortCol=" +
+    currentSortCol +
+    "&sortOrder=" +
+    currentSortOrder;
+
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  const refreshPlayers = await response.json();
+  allPlayersTBody.innerHTML = "";
+
+  refreshPlayers.forEach((pl) => {
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    let btn = document.createElement("button");
+
+    btn.textContent = "EDIT";
+    btn.dataset.stefansplayerid = pl.id;
+
+    tr.appendChild(createTableTdOrTh("th", pl.name));
+    tr.appendChild(createTableTdOrTh("td", pl.jersey));
+    tr.appendChild(createTableTdOrTh("td", pl.position));
+    allPlayersTBody.appendChild(tr);
+    td.appendChild(btn);
+    tr.appendChild(td);
+
+    btn.addEventListener("click", onClickPlayer);
+  });
+}
+
+//sortering-----------------------
+Object.values(allSortIcons).forEach((link) => {
+  link.addEventListener("click", () => {
+    currentSortCol = link.dataset.sortcol;
+    currentSortOrder = link.dataset.sortorder;
+    refreshTable();
+    console.log("livstecken");
+  });
+});
+//--------------------------------
 
 MicroModal.init({
   onShow: (modal) => console.info(`${modal.id} is shown`), // [1]
