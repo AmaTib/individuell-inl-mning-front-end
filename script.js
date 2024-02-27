@@ -31,7 +31,8 @@ async function fetchPlayers() {
 
 let players = await fetchPlayers();
 
-searchPlayer.addEventListener("input", function () {
+//vad gör denna eventlistener????????????????????
+/* searchPlayer.addEventListener("input", function () {
   const searchFor = searchPlayer.value.toLowerCase();
   for (let i = 0; i < players.length; i++) {
     // TODO add a matches function
@@ -42,7 +43,7 @@ searchPlayer.addEventListener("input", function () {
     }
   }
   updateTable();
-});
+}); */
 
 const createTableTdOrTh = function (elementType, innerText) {
   let element = document.createElement(elementType);
@@ -171,7 +172,9 @@ async function refreshTable() {
     "http://localhost:3000/players?sortCol=" +
     currentSortCol +
     "&sortOrder=" +
-    currentSortOrder;
+    currentSortOrder +
+    "&q=" +
+    currentSearchText;
 
   const response = await fetch(url, {
     headers: {
@@ -211,6 +214,29 @@ Object.values(allSortIcons).forEach((link) => {
   });
 });
 //--------------------------------
+
+//sök spelare-----------------------------
+function debounce(cb, delay = 250) {
+  let timeout;
+
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      cb(...args);
+    }, delay);
+  };
+}
+
+const updateQuery = debounce((query) => {
+  currentSearchText = query;
+  refreshTable();
+}, 1000);
+
+searchPlayer.addEventListener("input", (e) => {
+  console.log("skriv skriv");
+  updateQuery(e.target.value);
+});
+//----------------------------------------
 
 MicroModal.init({
   onShow: (modal) => console.info(`${modal.id} is shown`), // [1]
