@@ -19,6 +19,16 @@
   cursor: pointer;
   background-color: #005237;
  }
+
+ .page-item{
+  border: solid #005237 2px;
+  padding: 5px 13px 5px 13px;
+  border-radius: 50%;
+  margin: 0 5px;
+ }
+  .page-item.active {
+  background-color: #005237;
+}
  
  h1,
  h2,

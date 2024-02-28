@@ -4,10 +4,13 @@ const btnAdd = document.getElementById("btnAdd");
 const closeDialog = document.getElementById("closeDialog");
 const form = document.getElementById("editForm");
 const allSortIcons = document.getElementsByClassName("bi");
+const pageList = document.getElementById("pager");
 
 let currentSortCol = "id";
 let currentSortOrder = "asc";
 let currentSearchText = "";
+let currentPageNo = 1;
+let currentPageSize = 5;
 
 function Player(id, name, jersey, team, position) {
   this.id = id;
@@ -60,7 +63,7 @@ let editingPlayer = null;
 const onClickPlayer = function (event) {
   const htmlElementetSomViHarKlickatPa = event.target;
   console.log(htmlElementetSomViHarKlickatPa.dataset.stefansplayerid);
-  const player = players.find(
+  const player = players.result.find(
     (p) => p.id == htmlElementetSomViHarKlickatPa.dataset.stefansplayerid
   );
 
@@ -168,13 +171,19 @@ const updateTable = function () {
 updateTable();
 
 async function refreshTable() {
+  let offset = (currentPageNo - 1) * currentPageSize;
+
   let url =
     "http://localhost:3000/players?sortCol=" +
     currentSortCol +
     "&sortOrder=" +
     currentSortOrder +
     "&q=" +
-    currentSearchText;
+    currentSearchText +
+    "&limit=" +
+    currentPageSize +
+    "&offset=" +
+    offset;
 
   const response = await fetch(url, {
     headers: {
@@ -185,7 +194,7 @@ async function refreshTable() {
   const refreshPlayers = await response.json();
   allPlayersTBody.innerHTML = "";
 
-  refreshPlayers.forEach((pl) => {
+  refreshPlayers.result.forEach((pl) => {
     let tr = document.createElement("tr");
     let td = document.createElement("td");
     let btn = document.createElement("button");
@@ -202,7 +211,9 @@ async function refreshTable() {
 
     btn.addEventListener("click", onClickPlayer);
   });
+  createPager(refreshPlayers.total, currentPageNo, currentPageSize);
 }
+await refreshTable();
 
 //sortering-----------------------
 Object.values(allSortIcons).forEach((link) => {
@@ -236,6 +247,31 @@ searchPlayer.addEventListener("input", (e) => {
   console.log("skriv skriv");
   updateQuery(e.target.value);
 });
+//----------------------------------------
+
+//paging----------------------------------
+function createPager(count, pageNo, currentPageSize) {
+  pageList.innerHTML = "";
+  let totalPages = Math.ceil(count / currentPageSize);
+  for (let i = 1; i <= totalPages; i++) {
+    const li = document.createElement("li");
+    li.classList.add("page-item");
+    if (i == pageNo) {
+      li.classList.add("active");
+    }
+    const a = document.createElement("a");
+    a.href = "#";
+    a.innerText = i;
+    a.classList.add("page-link");
+    li.appendChild(a);
+    a.addEventListener("click", () => {
+      currentPageNo = i;
+      refreshTable();
+    });
+    pageList.appendChild(li);
+  }
+}
+
 //----------------------------------------
 
 MicroModal.init({
