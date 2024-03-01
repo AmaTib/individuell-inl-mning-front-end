@@ -122,7 +122,8 @@ btnAdd.addEventListener("click", () => {
   MicroModal.show("modal-1");
 });
 
-const updateTable = function () {
+//används inte längre!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/* const updateTable = function () {
   // while(allPlayersTBody.firstChild)
   //     allPlayersTBody.firstChild.remove()
   allPlayersTBody.innerHTML = "";
@@ -143,7 +144,7 @@ const updateTable = function () {
     tr.appendChild(createTableTdOrTh("th", players[i].name));
     tr.appendChild(createTableTdOrTh("td", players[i].jersey));
     tr.appendChild(createTableTdOrTh("td", players[i].position));
-    /* tr.appendChild(createTableTdOrTh("td", players[i].team)); */
+    //tr.appendChild(createTableTdOrTh("td", players[i].team));
 
     td.appendChild(btn);
     tr.appendChild(td);
@@ -168,9 +169,8 @@ const updateTable = function () {
     // }
     // createElement
   }
-};
-
-updateTable();
+}; */
+//updateTable();
 
 async function refreshTable() {
   let offset = (currentPageNo - 1) * currentPageSize;
