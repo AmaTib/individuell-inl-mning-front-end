@@ -67,6 +67,8 @@ const onClickPlayer = function (event) {
     (p) => p.id == htmlElementetSomViHarKlickatPa.dataset.stefansplayerid
   );
 
+  console.log(player);
+
   playerName.value = player.name;
   jersey.value = player.jersey;
   position.value = player.position;
@@ -107,7 +109,7 @@ form.addEventListener("submit", async (ev) => {
   //let json = await response.json();
 
   players = await fetchPlayers();
-  updateTable();
+  refreshTable();
   MicroModal.close("modal-1");
 });
 
@@ -191,10 +193,10 @@ async function refreshTable() {
     },
   });
 
-  const refreshPlayers = await response.json();
+  players = await response.json();
   allPlayersTBody.innerHTML = "";
 
-  refreshPlayers.result.forEach((pl) => {
+  players.result.forEach((pl) => {
     let tr = document.createElement("tr");
     let td = document.createElement("td");
     let btn = document.createElement("button");
@@ -205,13 +207,14 @@ async function refreshTable() {
     tr.appendChild(createTableTdOrTh("th", pl.name));
     tr.appendChild(createTableTdOrTh("td", pl.jersey));
     tr.appendChild(createTableTdOrTh("td", pl.position));
-    allPlayersTBody.appendChild(tr);
     td.appendChild(btn);
     tr.appendChild(td);
 
     btn.addEventListener("click", onClickPlayer);
+
+    allPlayersTBody.appendChild(tr);
   });
-  createPager(refreshPlayers.total, currentPageNo, currentPageSize);
+  createPager(players.total, currentPageNo, currentPageSize);
 }
 await refreshTable();
 
