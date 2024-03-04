@@ -34,20 +34,6 @@ async function fetchPlayers() {
 
 let players = await fetchPlayers();
 
-//vad gör denna eventlistener????????????????????
-/* searchPlayer.addEventListener("input", function () {
-  const searchFor = searchPlayer.value.toLowerCase();
-  for (let i = 0; i < players.length; i++) {
-    // TODO add a matches function
-    if (players[i].matches(searchFor)) {
-      players[i].visible = true;
-    } else {
-      players[i].visible = false;
-    }
-  }
-  updateTable();
-}); */
-
 const createTableTdOrTh = function (elementType, innerText) {
   let element = document.createElement(elementType);
   element.textContent = innerText;
@@ -62,12 +48,10 @@ let editingPlayer = null;
 
 const onClickPlayer = function (event) {
   const htmlElementetSomViHarKlickatPa = event.target;
-  console.log(htmlElementetSomViHarKlickatPa.dataset.stefansplayerid);
+
   const player = players.result.find(
     (p) => p.id == htmlElementetSomViHarKlickatPa.dataset.stefansplayerid
   );
-
-  console.log(player);
 
   playerName.value = player.name;
   jersey.value = player.jersey;
@@ -81,7 +65,7 @@ form.addEventListener("submit", async (ev) => {
   ev.preventDefault();
   let url = "";
   let method = "";
-  console.log(url);
+
   var newPlayer = {
     name: playerName.value,
     jersey: jersey.value,
@@ -121,56 +105,6 @@ btnAdd.addEventListener("click", () => {
 
   MicroModal.show("modal-1");
 });
-
-//används inte längre!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/* const updateTable = function () {
-  // while(allPlayersTBody.firstChild)
-  //     allPlayersTBody.firstChild.remove()
-  allPlayersTBody.innerHTML = "";
-
-  // först ta bort alla children
-  for (let i = 0; i < players.length; i++) {
-    // hrmmm you do foreach if you'd like, much nicer!
-    if (players[i].visible == false) {
-      continue;
-    }
-    let tr = document.createElement("tr");
-    let td = document.createElement("td");
-    let btn = document.createElement("button");
-
-    btn.textContent = "EDIT";
-    btn.dataset.stefansplayerid = players[i].id;
-
-    tr.appendChild(createTableTdOrTh("th", players[i].name));
-    tr.appendChild(createTableTdOrTh("td", players[i].jersey));
-    tr.appendChild(createTableTdOrTh("td", players[i].position));
-    //tr.appendChild(createTableTdOrTh("td", players[i].team));
-
-    td.appendChild(btn);
-    tr.appendChild(td);
-
-    btn.addEventListener("click", onClickPlayer);
-
-    // btn.addEventListener("click",function(){
-    //       alert(players[i].name)
-    //       //detta funkar fast med sk closures = magi vg
-    // })
-
-    allPlayersTBody.appendChild(tr);
-
-    // innerHTML och backticks `
-    // Problem - aldrig bra att bygga strängar som innehåller/kan innehålla html
-    //    injection
-    // for(let i = 0; i < players.length;i++) { // hrmmm you do foreach if you'd like, much nicer!
-    //                                         // I will show you in two weeks
-    //                                         //  or for p of players
-    //     let trText = `<tr><th scope="row">${players[i].name}</th><td>${players[i].jersey}</td><td>${players[i].position}</td><td>${players[i].team}</td></tr>`
-    //     allPlayersTBody.innerHTML += trText
-    // }
-    // createElement
-  }
-}; */
-//updateTable();
 
 async function refreshTable() {
   let offset = (currentPageNo - 1) * currentPageSize;
@@ -224,7 +158,6 @@ Object.values(allSortIcons).forEach((link) => {
     currentSortCol = link.dataset.sortcol;
     currentSortOrder = link.dataset.sortorder;
     refreshTable();
-    console.log("livstecken");
   });
 });
 //--------------------------------
@@ -247,7 +180,6 @@ const updateQuery = debounce((query) => {
 }, 1000);
 
 searchPlayer.addEventListener("input", (e) => {
-  console.log("skriv skriv");
   updateQuery(e.target.value);
 });
 //----------------------------------------
@@ -274,7 +206,6 @@ function createPager(count, pageNo, currentPageSize) {
     pageList.appendChild(li);
   }
 }
-
 //----------------------------------------
 
 MicroModal.init({
