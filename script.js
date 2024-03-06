@@ -195,7 +195,6 @@ function createPager(count, pageNo, currentPageSize) {
       li.classList.add("active");
     }
     const a = document.createElement("a");
-    a.href = "#";
     a.innerText = i;
     a.classList.add("page-link");
     li.appendChild(a);
