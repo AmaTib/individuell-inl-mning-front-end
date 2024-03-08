@@ -661,12 +661,12 @@
 
 body{
   background-image: url(/images/ice-4022209_1920.jpg);
+  background-size: cover;
   padding-top: 100px;
 }
 
 .container{
-   background-color: rgb(40, 43, 52);
-   
+  background-color: rgb(40, 43, 52);
   width: 100vw;
   padding: 20px;
   box-shadow: rgba(9, 14, 75, 0.35) 0px 5px 20px 6px;
