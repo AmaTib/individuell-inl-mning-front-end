@@ -17,17 +17,17 @@
  
  i:hover{
   cursor: pointer;
-  background-color: #005237;
+  background-color: #000000;
  }
 
  .page-item{
-  border: solid #005237 2px;
+  border: solid #1e1e1f 2px;
   padding: 5px 13px 5px 13px;
   border-radius: 50%;
   margin: 0 5px;
  }
   .page-item.active {
-  background-color: #005237;
+  background-color: #000000;
 }
  
  h1,
@@ -43,11 +43,18 @@
  h1 {
    --font-size: 2.5rem;
    --typography-spacing-vertical: 2.5rem;
+   background-color: rgb(40, 43, 52);
+   width: fit-content;
+   padding: 0 15px;
  }
  
  h2 {
    --font-size: 2rem;
    --typography-spacing-vertical: 2rem;
+   background-color: rgb(40, 43, 52);
+   width: fit-content;
+   padding: 5px 15px;
+   margin-top: 5px;
  }
  
  h3 {
@@ -265,11 +272,11 @@
    --h5-color: #759cb8;
    --h6-color: #668499;
    --muted-color: hsl(205, 20%, 50%);
-   --muted-border-color: #1b2e3c;
-   --primary: hsl(180, 85%, 36%);
-   --primary-hover: hsl(180, 80%, 45%);
+   --muted-border-color: #424b51;
+   --primary: hsl(204, 50%, 80%);
+   --primary-hover: hsl(204, 50%, 80%);
    --primary-focus: rgba(14, 170, 170, 0.25);
-   --primary-inverse: #fff;
+   --primary-inverse: #04347b;
    --secondary: hsl(205, 25%, 41%);
    --secondary-hover: hsl(205, 20%, 50%);
    --secondary-focus: rgba(102, 132, 153, 0.25);
@@ -536,7 +543,7 @@
   font-weight: 600;
   font-size: 1.25rem;
   line-height: 1.25;
-  color: #00449e;
+  color: #c3d2e6;
   box-sizing: border-box;
 }
 
@@ -650,4 +657,27 @@
 .modal__footer{
   display:flex;
   justify-content: space-between;
+}
+
+body{
+  background-image: url(/images/ice-4022209_1920.jpg);
+  padding-top: 100px;
+}
+
+.container{
+   background-color: rgb(40, 43, 52);
+   
+  width: 100vw;
+  padding: 20px;
+  box-shadow: rgba(9, 14, 75, 0.35) 0px 5px 20px 6px;
+}
+
+#header{
+  background-image: url(/images/ai-generated-8612309_1280-cropped.png);
+  background-size: cover;
+}
+
+#searchPlayer{
+  background-color: rgb(222, 233, 247);
+  color: #000;
 }
