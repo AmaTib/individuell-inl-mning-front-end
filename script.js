@@ -176,6 +176,7 @@ function debounce(cb, delay = 250) {
 
 const updateQuery = debounce((query) => {
   currentSearchText = query;
+  currentPageNo = 1;
   refreshTable();
 }, 1000);
 
